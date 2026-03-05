@@ -1,0 +1,780 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>ASSEMP — Associacao dos Servidores do Ministerio Publico do Amapa</title>
+<meta name="description" content="Ha mais de 25 anos promovendo qualidade de vida, convenios, beneficios e integracao para os servidores do Ministerio Publico do Amapa.">
+<link rel="icon" href="src/favicon.ico">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+*,*::before,*::after{margin:0;padding:0;box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{font-family:'Inter',system-ui,sans-serif;color:#1a1a1a;background:#fff;-webkit-font-smoothing:antialiased;line-height:1.6}
+img{max-width:100%;display:block}
+a{text-decoration:none;color:inherit}
+button{font-family:inherit;cursor:pointer;border:none;background:none}
+
+:root{
+  --red:#B71C1C;
+  --red-hover:#8B0000;
+  --gold:#C6930A;
+  --dark:#111;
+  --text:#444;
+  --text-light:#777;
+  --border:#e0e0e0;
+  --bg:#f7f7f7;
+}
+
+.wrap{max-width:1200px;margin:0 auto;padding:0 24px}
+@media(max-width:768px){.wrap{padding:0 16px}}
+
+/* ── NAV ── */
+.nav{position:fixed;top:0;left:0;right:0;z-index:100;background:#fff;border-bottom:1px solid var(--border);height:64px}
+.nav-inner{display:flex;align-items:center;justify-content:space-between;height:64px}
+.nav-logo{display:flex;align-items:center;gap:10px}
+.nav-logo img{height:36px;width:auto}
+.nav-logo strong{font-size:16px;font-weight:800;color:var(--dark);letter-spacing:-.3px}
+.nav-logo small{font-size:10px;color:var(--text-light);display:block;font-weight:500}
+.nav-links{display:flex;align-items:center;gap:4px}
+.nav-links a{color:var(--text);font-size:13px;font-weight:600;padding:8px 14px;transition:color .2s}
+.nav-links a:hover{color:var(--red)}
+.nav-cta{background:var(--red);color:#fff !important;padding:9px 20px !important;font-size:13px !important;font-weight:700 !important;transition:background .2s !important}
+.nav-cta:hover{background:var(--red-hover) !important}
+.nav-hamburger{display:none;color:var(--dark);width:40px;height:40px;align-items:center;justify-content:center}
+.nav-hamburger svg{width:24px;height:24px}
+
+.m-menu{display:none;position:fixed;top:64px;left:0;right:0;bottom:0;background:#fff;z-index:99;flex-direction:column;padding:16px 24px;border-top:1px solid var(--border)}
+.m-menu.open{display:flex}
+.m-menu a{color:var(--dark);font-size:15px;font-weight:600;padding:14px 0;border-bottom:1px solid #f0f0f0}
+
+/* ── HERO ── */
+.hero{margin-top:64px;position:relative;background:var(--dark);min-height:calc(100vh - 64px);display:flex;align-items:center;overflow:hidden}
+.hero-bg{position:absolute;inset:0}
+.hero-bg img{width:100%;height:100%;object-fit:cover;opacity:.3}
+.hero-bg::after{content:'';position:absolute;inset:0;background:linear-gradient(to right,rgba(0,0,0,.85) 40%,rgba(0,0,0,.3))}
+.hero-inner{position:relative;z-index:2;display:grid;grid-template-columns:1fr 1fr;gap:60px;align-items:center;padding:80px 0}
+.hero-tag{font-size:12px;font-weight:700;letter-spacing:2px;text-transform:uppercase;color:var(--gold);margin-bottom:20px}
+.hero h1{font-size:48px;font-weight:800;line-height:1.12;color:#fff;letter-spacing:-1px;margin-bottom:20px}
+.hero h1 span{color:var(--gold)}
+.hero-sub{font-size:17px;color:rgba(255,255,255,.6);line-height:1.7;margin-bottom:40px;max-width:460px}
+.hero-actions{display:flex;gap:12px;flex-wrap:wrap}
+.hero-cards{display:flex;flex-direction:column;gap:12px}
+.hero-card{background:rgba(255,255,255,.07);backdrop-filter:blur(8px);border:1px solid rgba(255,255,255,.1);padding:20px 24px;display:flex;align-items:center;gap:16px}
+.hero-card-icon{width:44px;height:44px;background:var(--red);display:flex;align-items:center;justify-content:center;flex-shrink:0}
+.hero-card-icon svg{width:22px;height:22px;color:#fff}
+.hero-card h4{font-size:14px;font-weight:700;color:#fff;margin-bottom:2px}
+.hero-card p{font-size:12px;color:rgba(255,255,255,.5)}
+
+.btn-red{display:inline-flex;align-items:center;gap:8px;padding:14px 28px;font-size:14px;font-weight:700;background:var(--red);color:#fff;transition:background .2s}
+.btn-red:hover{background:var(--red-hover)}
+.btn-red svg{width:16px;height:16px}
+.btn-outline{display:inline-flex;align-items:center;gap:8px;padding:14px 28px;font-size:14px;font-weight:700;background:transparent;color:rgba(255,255,255,.7);border:1px solid rgba(255,255,255,.2);transition:all .2s}
+.btn-outline:hover{color:#fff;border-color:rgba(255,255,255,.5)}
+
+/* ── TICKER ── */
+.ticker{background:var(--red);overflow:hidden;padding:12px 0;white-space:nowrap}
+.ticker-track{display:flex;gap:40px;animation:marquee 25s linear infinite}
+.ticker-item{font-size:13px;font-weight:700;color:#fff;letter-spacing:.5px;text-transform:uppercase;display:flex;align-items:center;gap:10px;flex-shrink:0}
+.ticker-dot{width:5px;height:5px;background:var(--gold);display:block;flex-shrink:0}
+@keyframes marquee{0%{transform:translateX(0)}100%{transform:translateX(-50%)}}
+
+/* ── STATS ── */
+.stats{background:#fff;border-bottom:1px solid var(--border);padding:48px 0}
+.stats-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:24px;text-align:center}
+.stats-num{font-size:40px;font-weight:800;color:var(--red);line-height:1;letter-spacing:-1px}
+.stats-num span{color:var(--gold)}
+.stats-label{font-size:13px;color:var(--text-light);margin-top:6px;font-weight:500}
+
+/* ── SECTIONS ── */
+.section{padding:80px 0}
+.section-alt{background:var(--bg)}
+@media(max-width:768px){.section{padding:48px 0}}
+
+.sect-tag{font-size:12px;font-weight:700;letter-spacing:2px;text-transform:uppercase;color:var(--red);margin-bottom:12px;display:flex;align-items:center;gap:10px}
+.sect-tag::before{content:'';width:24px;height:2px;background:var(--gold)}
+.sect-title{font-size:36px;font-weight:800;line-height:1.15;color:var(--dark);letter-spacing:-.5px;margin-bottom:14px}
+.sect-desc{font-size:16px;color:var(--text-light);line-height:1.7;max-width:520px}
+.center{text-align:center}
+.center .sect-desc{margin:0 auto}
+.center .sect-tag{justify-content:center}
+
+/* ── QUEM SOMOS (two-col image + text) ── */
+.two-col{display:grid;grid-template-columns:1fr 1fr;gap:64px;align-items:center}
+.two-col img{width:100%;aspect-ratio:4/3;object-fit:cover;border:1px solid var(--border)}
+.feature-list{list-style:none;margin-top:24px}
+.feature-list li{display:flex;align-items:center;gap:12px;padding:10px 0;border-bottom:1px solid #f0f0f0;font-size:14px;color:var(--text)}
+.feature-list li:last-child{border:none}
+.feature-check{width:22px;height:22px;background:var(--red);display:flex;align-items:center;justify-content:center;flex-shrink:0}
+.feature-check svg{width:12px;height:12px;color:#fff}
+
+/* ── SERVICOS ── */
+.servicos-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1px;background:var(--border);border:1px solid var(--border);margin-top:48px}
+.servico{background:#fff;padding:36px 28px;transition:background .2s;cursor:pointer}
+.servico:hover{background:var(--bg)}
+.servico-icon{width:44px;height:44px;margin-bottom:16px;display:flex;align-items:center;justify-content:center;color:var(--red)}
+.servico-icon svg{width:26px;height:26px;stroke-width:1.5}
+.servico h3{font-size:16px;font-weight:700;color:var(--dark);margin-bottom:6px}
+.servico p{font-size:13px;color:var(--text-light);line-height:1.6}
+
+/* ── NOTICIAS ── */
+.news-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:24px;margin-top:48px}
+.news-card{border:1px solid var(--border);overflow:hidden;transition:box-shadow .2s}
+.news-card:hover{box-shadow:0 4px 16px rgba(0,0,0,.06)}
+.news-thumb{height:180px;overflow:hidden;background:var(--bg)}
+.news-thumb img{width:100%;height:100%;object-fit:cover;transition:transform .4s}
+.news-card:hover .news-thumb img{transform:scale(1.04)}
+.news-body{padding:24px}
+.news-tag{display:inline-block;font-size:10px;font-weight:700;padding:4px 10px;letter-spacing:.5px;text-transform:uppercase;margin-bottom:10px}
+.tag-comunicado{background:#fce4ec;color:var(--red)}
+.tag-evento{background:#fff8e1;color:var(--gold)}
+.news-body h4{font-size:15px;font-weight:700;color:var(--dark);margin-bottom:6px;line-height:1.4}
+.news-body p{font-size:13px;color:var(--text-light);line-height:1.6}
+.news-date{font-size:11px;color:var(--text-light);margin-top:10px;font-weight:500}
+
+/* ── CONVENIOS ── */
+.conv-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;margin-top:48px}
+.conv-card{display:flex;align-items:flex-start;gap:16px;padding:24px;border:1px solid var(--border);background:#fff;transition:border-color .2s}
+.conv-card:hover{border-color:var(--red)}
+.conv-icon{width:44px;height:44px;background:var(--bg);display:flex;align-items:center;justify-content:center;flex-shrink:0;color:var(--text-light)}
+.conv-icon svg{width:22px;height:22px;stroke-width:1.5}
+.conv-card h4{font-size:14px;font-weight:700;color:var(--dark);margin-bottom:2px}
+.conv-card p{font-size:12px;color:var(--text-light)}
+.conv-badges{display:flex;gap:6px;margin-top:8px}
+.badge{font-size:10px;font-weight:700;padding:3px 8px;letter-spacing:.3px}
+.badge-cat{background:#fce4ec;color:var(--red)}
+.badge-desc{background:#fff8e1;color:#7a6200}
+
+/* ── SEDE ── */
+.sede-grid{display:grid;grid-template-columns:1fr 1fr;gap:24px;margin-top:48px}
+.sede-item{position:relative;overflow:hidden;aspect-ratio:16/10}
+.sede-item img{width:100%;height:100%;object-fit:cover;transition:transform .5s}
+.sede-item:hover img{transform:scale(1.03)}
+.sede-overlay{position:absolute;bottom:0;left:0;right:0;padding:20px 24px;background:linear-gradient(to top,rgba(0,0,0,.7),transparent)}
+.sede-overlay h4{font-size:16px;font-weight:700;color:#fff}
+.sede-overlay p{font-size:12px;color:rgba(255,255,255,.7)}
+
+/* ── STEPS ── */
+.steps-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:0;margin-top:48px;border:1px solid var(--border)}
+.step{padding:32px 24px;border-right:1px solid var(--border);position:relative}
+.step:last-child{border:none}
+.step::before{content:'';position:absolute;top:0;left:0;width:100%;height:3px;background:var(--red)}
+.step:nth-child(even)::before{background:var(--gold)}
+.step-num{font-size:36px;font-weight:800;color:#eee;line-height:1;margin-bottom:12px}
+.step h3{font-size:15px;font-weight:700;color:var(--dark);margin-bottom:6px}
+.step p{font-size:13px;color:var(--text-light);line-height:1.5}
+
+/* ── SOBRE ── */
+.about-grid{display:grid;grid-template-columns:1fr 1fr;gap:64px;align-items:start}
+.about-text p{font-size:15px;color:var(--text);line-height:1.8;margin-bottom:14px}
+.about-text p strong{color:var(--dark)}
+.about-values{border:1px solid var(--border);margin-top:28px}
+.about-val{padding:20px 24px;border-bottom:1px solid var(--border);display:grid;grid-template-columns:90px 1fr;gap:12px;align-items:baseline}
+.about-val:last-child{border:none}
+.about-val h4{font-size:12px;font-weight:700;color:var(--red);text-transform:uppercase;letter-spacing:.5px}
+.about-val p{font-size:14px;color:var(--text);line-height:1.5}
+.about-img img{width:100%;aspect-ratio:3/4;object-fit:cover;border:1px solid var(--border)}
+.about-info{background:var(--dark);color:#fff;padding:24px 28px;font-size:13px;line-height:2.2}
+.about-info strong{color:var(--gold);font-weight:600}
+
+/* ── CTA ── */
+.cta{background:var(--red);padding:80px 0;position:relative;overflow:hidden}
+.cta::before{content:'ASSEMP';position:absolute;right:-40px;top:50%;transform:translateY(-50%);font-size:180px;font-weight:800;color:rgba(0,0,0,.05);letter-spacing:-6px;white-space:nowrap;pointer-events:none}
+.cta-inner{position:relative;z-index:1;max-width:600px}
+.cta-inner h2{font-size:36px;font-weight:800;color:#fff;line-height:1.15;letter-spacing:-.5px;margin-bottom:16px}
+.cta-inner p{font-size:16px;color:rgba(255,255,255,.65);line-height:1.7;margin-bottom:32px}
+.cta-btns{display:flex;gap:12px;flex-wrap:wrap}
+.btn-white{display:inline-flex;align-items:center;gap:8px;padding:14px 28px;font-size:14px;font-weight:700;background:#fff;color:var(--dark);transition:background .2s}
+.btn-white:hover{background:#f0f0f0}
+.btn-white svg{width:16px;height:16px}
+.btn-outline-w{display:inline-flex;align-items:center;gap:8px;padding:14px 28px;font-size:14px;font-weight:700;color:rgba(255,255,255,.7);border:1px solid rgba(255,255,255,.25);transition:all .2s}
+.btn-outline-w:hover{color:#fff;border-color:rgba(255,255,255,.5)}
+
+/* ── FOOTER ── */
+.footer{background:var(--dark);padding:56px 0 0}
+.footer-grid{display:grid;grid-template-columns:2fr 1fr 1fr 1fr;gap:40px;padding-bottom:40px;border-bottom:1px solid rgba(255,255,255,.06)}
+.footer-brand p{font-size:13px;color:rgba(255,255,255,.35);line-height:1.7;margin-top:12px}
+.footer-logo{display:flex;align-items:center;gap:10px}
+.footer-logo img{height:32px}
+.footer-logo strong{color:#fff;font-size:15px;font-weight:800}
+.f-col h5{font-size:11px;font-weight:700;color:rgba(255,255,255,.25);text-transform:uppercase;letter-spacing:1.5px;margin-bottom:16px}
+.f-col a{display:block;font-size:13px;color:rgba(255,255,255,.4);margin-bottom:10px;font-weight:500;transition:color .2s}
+.f-col a:hover{color:var(--gold)}
+.footer-bottom{padding:20px 0;text-align:center;font-size:11px;color:rgba(255,255,255,.2)}
+.footer-bottom a{color:var(--gold)}
+
+/* ── RESPONSIVE ── */
+@media(max-width:1024px){
+  .hero-inner{grid-template-columns:1fr;text-align:left}
+  .hero-cards{display:none}
+  .two-col,.about-grid{grid-template-columns:1fr;gap:40px}
+  .servicos-grid{grid-template-columns:repeat(2,1fr)}
+  .news-grid,.conv-grid{grid-template-columns:repeat(2,1fr)}
+  .sede-grid{grid-template-columns:1fr}
+  .steps-grid{grid-template-columns:repeat(2,1fr)}
+  .step:nth-child(2){border-right:none}
+  .stats-grid{grid-template-columns:repeat(2,1fr)}
+  .footer-grid{grid-template-columns:1fr 1fr;gap:32px}
+}
+@media(max-width:768px){
+  .nav-links{display:none}
+  .nav-hamburger{display:flex}
+  .hero h1{font-size:32px}
+  .sect-title{font-size:28px}
+  .servicos-grid,.news-grid,.conv-grid{grid-template-columns:1fr}
+  .steps-grid{grid-template-columns:1fr}
+  .step{border-right:none !important;border-bottom:1px solid var(--border)}
+  .step:last-child{border-bottom:none}
+  .stats-grid{grid-template-columns:1fr 1fr}
+  .stats-num{font-size:32px}
+  .about-val{grid-template-columns:1fr;gap:4px}
+  .footer-grid{grid-template-columns:1fr}
+  .cta-inner h2{font-size:28px}
+}
+
+.reveal{opacity:0;transform:translateY(24px);transition:opacity .6s ease,transform .6s ease}
+.reveal.visible{opacity:1;transform:none}
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<header class="nav">
+  <div class="wrap">
+    <div class="nav-inner">
+      <a class="nav-logo" href="#">
+        <img src="src/logo-assemp.png" alt="ASSEMP">
+        <div>
+          <strong>ASSEMP</strong>
+          <small>Servidores do MP-AP</small>
+        </div>
+      </a>
+      <nav class="nav-links">
+        <a href="#quem-somos">Quem Somos</a>
+        <a href="#servicos">Servicos</a>
+        <a href="#convenios">Convenios</a>
+        <a href="#noticias">Noticias</a>
+        <a href="#sede">Sede</a>
+        <a href="#sobre">Institucional</a>
+        <a href="#contato" class="nav-cta">Fale Conosco</a>
+      </nav>
+      <button class="nav-hamburger" onclick="document.getElementById('mm').classList.toggle('open')" aria-label="Menu">
+        <svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M4 6h16M4 12h16M4 18h16"/></svg>
+      </button>
+    </div>
+  </div>
+</header>
+
+<nav class="m-menu" id="mm">
+  <a href="#quem-somos" onclick="document.getElementById('mm').classList.remove('open')">Quem Somos</a>
+  <a href="#servicos" onclick="document.getElementById('mm').classList.remove('open')">Servicos</a>
+  <a href="#convenios" onclick="document.getElementById('mm').classList.remove('open')">Convenios</a>
+  <a href="#noticias" onclick="document.getElementById('mm').classList.remove('open')">Noticias</a>
+  <a href="#sede" onclick="document.getElementById('mm').classList.remove('open')">Sede</a>
+  <a href="#sobre" onclick="document.getElementById('mm').classList.remove('open')">Institucional</a>
+  <a href="#contato" onclick="document.getElementById('mm').classList.remove('open')">Fale Conosco</a>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-bg">
+    <img src="src/banner-diretoria.jpg" alt="">
+  </div>
+  <div class="wrap">
+    <div class="hero-inner">
+      <div>
+        <div class="hero-tag">Desde 1998 ao lado do servidor</div>
+        <h1>Servidor, <span>gerencie seus beneficios</span> com a ASSEMP.</h1>
+        <p class="hero-sub">Ha mais de 25 anos promovendo qualidade de vida, convenios, beneficios e integracao para os servidores do Ministerio Publico do Amapa e suas familias.</p>
+        <div class="hero-actions">
+          <a href="#servicos" class="btn-red">
+            Validar Carteirinha
+            <svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+          </a>
+          <a href="#convenios" class="btn-outline">Ver Convenios</a>
+        </div>
+      </div>
+      <div class="hero-cards">
+        <div class="hero-card">
+          <div class="hero-card-icon">
+            <svg fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24"><rect x="2" y="5" width="20" height="14" rx="2"/><path d="M2 10h20"/></svg>
+          </div>
+          <div>
+            <h4>Carteirinha Digital</h4>
+            <p>Validacao online instantanea</p>
+          </div>
+        </div>
+        <div class="hero-card">
+          <div class="hero-card-icon" style="background:var(--gold)">
+            <svg fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24"><path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 00-3-3.87M16 3.13a4 4 0 010 7.75"/></svg>
+          </div>
+          <div>
+            <h4>+50 Convenios</h4>
+            <p>Descontos exclusivos para associados</p>
+          </div>
+        </div>
+        <div class="hero-card">
+          <div class="hero-card-icon">
+            <svg fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24"><path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z"/><path d="M14 2v6h6M16 13H8M16 17H8M10 9H8"/></svg>
+          </div>
+          <div>
+            <h4>Declaracoes Online</h4>
+            <p>Emissao e autenticacao digital</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- TICKER -->
+<div class="ticker">
+  <div class="ticker-track">
+    <span class="ticker-item"><span class="ticker-dot"></span>+2.500 Associados</span>
+    <span class="ticker-item"><span class="ticker-dot"></span>+50 Convenios</span>
+    <span class="ticker-item"><span class="ticker-dot"></span>+25 Anos de Tradicao</span>
+    <span class="ticker-item"><span class="ticker-dot"></span>Carteirinha Digital</span>
+    <span class="ticker-item"><span class="ticker-dot"></span>Validacao Online</span>
+    <span class="ticker-item"><span class="ticker-dot"></span>Sede Campestre</span>
+    <span class="ticker-item"><span class="ticker-dot"></span>Descontos Exclusivos</span>
+    <span class="ticker-item"><span class="ticker-dot"></span>100% Dedicacao</span>
+    <span class="ticker-item"><span class="ticker-dot"></span>+2.500 Associados</span>
+    <span class="ticker-item"><span class="ticker-dot"></span>+50 Convenios</span>
+    <span class="ticker-item"><span class="ticker-dot"></span>+25 Anos de Tradicao</span>
+    <span class="ticker-item"><span class="ticker-dot"></span>Carteirinha Digital</span>
+    <span class="ticker-item"><span class="ticker-dot"></span>Validacao Online</span>
+    <span class="ticker-item"><span class="ticker-dot"></span>Sede Campestre</span>
+    <span class="ticker-item"><span class="ticker-dot"></span>Descontos Exclusivos</span>
+    <span class="ticker-item"><span class="ticker-dot"></span>100% Dedicacao</span>
+  </div>
+</div>
+
+<!-- STATS -->
+<section class="stats">
+  <div class="wrap">
+    <div class="stats-grid reveal">
+      <div>
+        <div class="stats-num">+2.<span>500</span></div>
+        <div class="stats-label">Associados Ativos</div>
+      </div>
+      <div>
+        <div class="stats-num">+<span>50</span></div>
+        <div class="stats-label">Convenios Firmados</div>
+      </div>
+      <div>
+        <div class="stats-num">+<span>25</span></div>
+        <div class="stats-label">Anos de Tradicao</div>
+      </div>
+      <div>
+        <div class="stats-num"><span>100</span>%</div>
+        <div class="stats-label">Dedicacao ao Servidor</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- QUEM SOMOS -->
+<section class="section" id="quem-somos">
+  <div class="wrap">
+    <div class="two-col">
+      <div class="reveal">
+        <img src="src/assemp-foto.jpeg" alt="ASSEMP">
+      </div>
+      <div class="reveal">
+        <div class="sect-tag">Quem Somos</div>
+        <h2 class="sect-title">Gerencie seus beneficios de associado</h2>
+        <p class="sect-desc">Desenvolvemos os recursos essenciais para atender os nossos associados e seus familiares com agilidade e transparencia.</p>
+        <ul class="feature-list">
+          <li>
+            <span class="feature-check"><svg fill="none" stroke="currentColor" stroke-width="3" viewBox="0 0 24 24"><path d="M5 13l4 4L19 7"/></svg></span>
+            Carteirinha digital com validacao online
+          </li>
+          <li>
+            <span class="feature-check"><svg fill="none" stroke="currentColor" stroke-width="3" viewBox="0 0 24 24"><path d="M5 13l4 4L19 7"/></svg></span>
+            Rede de convenios com descontos exclusivos
+          </li>
+          <li>
+            <span class="feature-check"><svg fill="none" stroke="currentColor" stroke-width="3" viewBox="0 0 24 24"><path d="M5 13l4 4L19 7"/></svg></span>
+            Acesso a sede campestre com piscina e quadras
+          </li>
+          <li>
+            <span class="feature-check"><svg fill="none" stroke="currentColor" stroke-width="3" viewBox="0 0 24 24"><path d="M5 13l4 4L19 7"/></svg></span>
+            Eventos esportivos e culturais
+          </li>
+          <li>
+            <span class="feature-check"><svg fill="none" stroke="currentColor" stroke-width="3" viewBox="0 0 24 24"><path d="M5 13l4 4L19 7"/></svg></span>
+            Atendimento personalizado
+          </li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- SERVICOS -->
+<section class="section section-alt" id="servicos">
+  <div class="wrap">
+    <div class="center reveal">
+      <div class="sect-tag">Funcionalidades</div>
+      <h2 class="sect-title">Nossos Servicos</h2>
+      <p class="sect-desc">Acesse os principais servicos da Associacao de forma rapida e segura.</p>
+    </div>
+    <div class="servicos-grid reveal">
+      <div class="servico">
+        <div class="servico-icon">
+          <svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><rect x="2" y="5" width="20" height="14" rx="2"/><path d="M2 10h20"/></svg>
+        </div>
+        <h3>Validar Carteirinha</h3>
+        <p>Verifique a autenticidade da carteirinha digital do associado com seguranca e rapidez.</p>
+      </div>
+      <div class="servico">
+        <div class="servico-icon">
+          <svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z"/><path d="M14 2v6h6M16 13H8M16 17H8M10 9H8"/></svg>
+        </div>
+        <h3>Validar Declaracao</h3>
+        <p>Autentique declaracoes emitidas pela secretaria da Associacao.</p>
+      </div>
+      <div class="servico">
+        <div class="servico-icon">
+          <svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 00-3-3.87M16 3.13a4 4 0 010 7.75"/></svg>
+        </div>
+        <h3>Buscar Convenios</h3>
+        <p>Encontre os parceiros e convenios disponiveis para voce e sua familia.</p>
+      </div>
+      <div class="servico">
+        <div class="servico-icon">
+          <svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path d="M2 3h6a4 4 0 014 4v14a3 3 0 00-3-3H2z"/><path d="M22 3h-6a4 4 0 00-4 4v14a3 3 0 013-3h7z"/></svg>
+        </div>
+        <h3>Validar Rifa</h3>
+        <p>Verifique o status do seu numero da rifa promovida pela Associacao.</p>
+      </div>
+      <div class="servico">
+        <div class="servico-icon">
+          <svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><path d="M22 6l-10 7L2 6"/></svg>
+        </div>
+        <h3>Fale Conosco</h3>
+        <p>Entre em contato com a equipe da Associacao para tirar duvidas ou solicitar informacoes.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- NOTICIAS -->
+<section class="section" id="noticias">
+  <div class="wrap">
+    <div class="center reveal">
+      <div class="sect-tag">Ultimas Noticias</div>
+      <h2 class="sect-title">Fique por Dentro</h2>
+      <p class="sect-desc">Acompanhe tudo que acontece na ASSEMP.</p>
+    </div>
+    <div class="news-grid reveal">
+      <div class="news-card">
+        <div class="news-thumb"><img src="src/retomada-atividades.jpg" alt="Assembleia"></div>
+        <div class="news-body">
+          <span class="news-tag tag-comunicado">Comunicado</span>
+          <h4>Assembleia Geral Ordinaria - Marco 2025</h4>
+          <p>A diretoria convoca todos os associados para a AGO que acontece no proximo dia 15.</p>
+          <div class="news-date">01/03/2025</div>
+        </div>
+      </div>
+      <div class="news-card">
+        <div class="news-thumb"><img src="src/piscina.jpg" alt="Natacao"></div>
+        <div class="news-body">
+          <span class="news-tag tag-evento">Eventos</span>
+          <h4>Campeonato de Natacao - Inscricoes Abertas</h4>
+          <p>As inscricoes para o campeonato interno de natacao ja estao abertas. Participe!</p>
+          <div class="news-date">25/02/2025</div>
+        </div>
+      </div>
+      <div class="news-card">
+        <div class="news-thumb"><img src="src/banner-corrida.jpg" alt="Corrida"></div>
+        <div class="news-body">
+          <span class="news-tag tag-evento">Eventos</span>
+          <h4>Corrida ASSEMP - Edicao Especial</h4>
+          <p>A tradicional corrida da ASSEMP tera edicao especial este ano. Confira!</p>
+          <div class="news-date">18/02/2025</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CONVENIOS -->
+<section class="section section-alt" id="convenios">
+  <div class="wrap">
+    <div class="center reveal">
+      <div class="sect-tag">Parceiros</div>
+      <h2 class="sect-title">Convenios e Descontos</h2>
+      <p class="sect-desc">Confira os parceiros com beneficios exclusivos para associados ASSEMP.</p>
+    </div>
+    <div class="conv-grid reveal">
+      <div class="conv-card">
+        <div class="conv-icon">
+          <svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path d="M22 12h-4l-3 9L9 3l-3 9H2"/></svg>
+        </div>
+        <div>
+          <h4>Clinica Medica VitaSaude</h4>
+          <p>Consultas, exames e procedimentos</p>
+          <div class="conv-badges">
+            <span class="badge badge-cat">Saude</span>
+            <span class="badge badge-desc">30% desc.</span>
+          </div>
+        </div>
+      </div>
+      <div class="conv-card">
+        <div class="conv-icon">
+          <svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path d="M19 14c1.49-1.46 3-3.21 3-5.5A5.5 5.5 0 0016.5 3c-1.76 0-3 .5-4.5 2-1.5-1.5-2.74-2-4.5-2A5.5 5.5 0 002 8.5c0 2.3 1.5 4.05 3 5.5l7 7z"/></svg>
+        </div>
+        <div>
+          <h4>OdontoPlus Clinica</h4>
+          <p>Odontologia geral e especialidades</p>
+          <div class="conv-badges">
+            <span class="badge badge-cat">Saude</span>
+            <span class="badge badge-desc">40% desc.</span>
+          </div>
+        </div>
+      </div>
+      <div class="conv-card">
+        <div class="conv-icon">
+          <svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></svg>
+        </div>
+        <div>
+          <h4>Farmacia PopularMed</h4>
+          <p>Medicamentos e cosmeticos</p>
+          <div class="conv-badges">
+            <span class="badge badge-cat">Farmacia</span>
+            <span class="badge badge-desc">20% desc.</span>
+          </div>
+        </div>
+      </div>
+      <div class="conv-card">
+        <div class="conv-icon">
+          <svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path d="M2 3h6a4 4 0 014 4v14a3 3 0 00-3-3H2z"/><path d="M22 3h-6a4 4 0 00-4 4v14a3 3 0 013-3h7z"/></svg>
+        </div>
+        <div>
+          <h4>Faculdade AtenaSaber</h4>
+          <p>Graduacao e pos-graduacao</p>
+          <div class="conv-badges">
+            <span class="badge badge-cat">Educacao</span>
+            <span class="badge badge-desc">15% desc.</span>
+          </div>
+        </div>
+      </div>
+      <div class="conv-card">
+        <div class="conv-icon">
+          <svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path d="M18 8h1a4 4 0 010 8h-1M2 8h16v9a4 4 0 01-4 4H6a4 4 0 01-4-4V8zM6 1v3M10 1v3M14 1v3"/></svg>
+        </div>
+        <div>
+          <h4>Restaurante Sabor &amp; Arte</h4>
+          <p>Almoco executivo para associados</p>
+          <div class="conv-badges">
+            <span class="badge badge-cat">Alimentacao</span>
+            <span class="badge badge-desc">10% desc.</span>
+          </div>
+        </div>
+      </div>
+      <div class="conv-card">
+        <div class="conv-icon">
+          <svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path d="M18 8A6 6 0 006 8c0 7-3 9-3 9h18s-3-2-3-9"/><path d="M13.73 21a2 2 0 01-3.46 0"/></svg>
+        </div>
+        <div>
+          <h4>Academia FitLife</h4>
+          <p>Musculacao, aerobico e aulas</p>
+          <div class="conv-badges">
+            <span class="badge badge-cat">Lazer</span>
+            <span class="badge badge-desc">25% desc.</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- SEDE -->
+<section class="section" id="sede">
+  <div class="wrap">
+    <div class="center reveal">
+      <div class="sect-tag">Estrutura</div>
+      <h2 class="sect-title">Sede Campestre</h2>
+      <p class="sect-desc">Espaco exclusivo para lazer e eventos dos associados e suas familias.</p>
+    </div>
+    <div class="sede-grid reveal">
+      <div class="sede-item">
+        <img src="src/entrada-sede.jpg" alt="Entrada da Sede">
+        <div class="sede-overlay">
+          <h4>Entrada da Sede</h4>
+          <p>Rod. Duca Serra, 520 - Alvorada, Macapa-AP</p>
+        </div>
+      </div>
+      <div class="sede-item">
+        <img src="src/piscina.jpg" alt="Piscina">
+        <div class="sede-overlay">
+          <h4>Piscina</h4>
+          <p>Adulto e infantil para toda a familia</p>
+        </div>
+      </div>
+      <div class="sede-item">
+        <img src="src/campo-futebol.jpg" alt="Campo de Futebol">
+        <div class="sede-overlay">
+          <h4>Campo de Futebol</h4>
+          <p>Torneios e pratica esportiva</p>
+        </div>
+      </div>
+      <div class="sede-item">
+        <img src="src/banner-corrida.jpg" alt="Eventos">
+        <div class="sede-overlay">
+          <h4>Eventos</h4>
+          <p>Corridas, confraternizacoes e campeonatos</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- COMO FUNCIONA -->
+<section class="section section-alt" id="como-funciona">
+  <div class="wrap">
+    <div class="center reveal">
+      <div class="sect-tag">Processo</div>
+      <h2 class="sect-title">Como Funciona</h2>
+      <p class="sect-desc">Em poucos passos voce acessa todos os beneficios da associacao.</p>
+    </div>
+    <div class="steps-grid reveal">
+      <div class="step">
+        <div class="step-num">01</div>
+        <h3>Acesse o Portal</h3>
+        <p>Entre no site da ASSEMP pelo computador, tablet ou celular.</p>
+      </div>
+      <div class="step">
+        <div class="step-num">02</div>
+        <h3>Identifique-se</h3>
+        <p>Informe sua matricula e CPF para validacao segura.</p>
+      </div>
+      <div class="step">
+        <div class="step-num">03</div>
+        <h3>Escolha o Servico</h3>
+        <p>Carteirinha, declaracao, convenios ou consultas.</p>
+      </div>
+      <div class="step">
+        <div class="step-num">04</div>
+        <h3>Pronto!</h3>
+        <p>Resultado instantaneo, sem filas e sem espera.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- SOBRE -->
+<section class="section" id="sobre">
+  <div class="wrap">
+    <div class="about-grid">
+      <div class="reveal">
+        <div class="sect-tag">Institucional</div>
+        <h2 class="sect-title">Sobre a ASSEMP</h2>
+        <div class="about-text">
+          <p>Fundada em <strong>20 de fevereiro de 1998</strong>, a <strong>Associacao dos Servidores do Ministerio Publico do Estado do Amapa</strong> nasceu com o proposito de reunir, representar e beneficiar os servidores do MP-AP e seus familiares, promovendo bem-estar, cultura, esporte e lazer.</p>
+          <p>Ao longo de mais de 25 anos, crescemos e conquistamos uma sede propria, firmamos dezenas de convenios e nos tornamos referencia no setor associativo da regiao.</p>
+        </div>
+        <div class="about-values">
+          <div class="about-val">
+            <h4>Missao</h4>
+            <p>Promover qualidade de vida e bem-estar aos associados e suas familias.</p>
+          </div>
+          <div class="about-val">
+            <h4>Visao</h4>
+            <p>Ser a maior e melhor associacao de servidores publicos do estado.</p>
+          </div>
+          <div class="about-val">
+            <h4>Valores</h4>
+            <p>Transparencia, etica, compromisso e dedicacao ao servidor.</p>
+          </div>
+        </div>
+      </div>
+      <div class="about-img reveal">
+        <img src="src/diretoria.jpg" alt="Diretoria ASSEMP">
+        <div class="about-info">
+          <strong>Fundacao:</strong> 20/02/1998<br>
+          <strong>CNPJ:</strong> 02.374.137/0001-31<br>
+          <strong>Endereco:</strong> Rod. Duca Serra, 520 - Alvorada<br>
+          <strong>Cidade:</strong> Macapa - AP, CEP 68.906-698<br>
+          <strong>Telefone:</strong> (96) 99115-0564<br>
+          <strong>E-mail:</strong> assemp26@gmail.com<br>
+          <strong>Horario:</strong> Seg-Sex 08h-18h
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CTA -->
+<section class="cta" id="contato">
+  <div class="wrap">
+    <div class="cta-inner reveal">
+      <h2>Pronto para aproveitar seus beneficios?</h2>
+      <p>Entre em contato conosco ou acesse a area do associado para validar sua carteirinha e conferir todos os convenios disponiveis.</p>
+      <div class="cta-btns">
+        <a href="#" class="btn-white">
+          Area do Associado
+          <svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M15 3h4a2 2 0 012 2v14a2 2 0 01-2 2h-4M10 17l5-5-5-5M13.8 12H3"/></svg>
+        </a>
+        <a href="mailto:assemp26@gmail.com" class="btn-outline-w">assemp26@gmail.com</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer class="footer">
+  <div class="wrap">
+    <div class="footer-grid">
+      <div class="footer-brand">
+        <div class="footer-logo">
+          <img src="src/logo-assemp.png" alt="ASSEMP">
+          <strong>ASSEMP</strong>
+        </div>
+        <p>Promovendo qualidade de vida, beneficios e integracao para os servidores do Ministerio Publico do Amapa ha mais de 25 anos.</p>
+      </div>
+      <div class="f-col">
+        <h5>Institucional</h5>
+        <a href="#sobre">Sobre Nos</a>
+        <a href="#">Diretoria</a>
+        <a href="#sede">Nossa Sede</a>
+        <a href="#noticias">Noticias</a>
+      </div>
+      <div class="f-col">
+        <h5>Servicos</h5>
+        <a href="#servicos">Carteirinha Digital</a>
+        <a href="#servicos">Declaracoes</a>
+        <a href="#convenios">Convenios</a>
+        <a href="#">Rifa</a>
+      </div>
+      <div class="f-col">
+        <h5>Contato</h5>
+        <a href="#">Rod. Duca Serra, 520</a>
+        <a href="tel:+559699115-0564">(96) 99115-0564</a>
+        <a href="mailto:assemp26@gmail.com">assemp26@gmail.com</a>
+        <a href="#">Macapa - AP, 68.906-698</a>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      2025 <a href="#">ASSEMP</a> — Associacao dos Servidores do Ministerio Publico do Estado do Amapa. CNPJ: 02.374.137/0001-31. Todos os direitos reservados.
+    </div>
+  </div>
+</footer>
+
+<script>
+var obs=new IntersectionObserver(function(e){
+  e.forEach(function(en){if(en.isIntersecting)en.target.classList.add('visible')})
+},{threshold:.1,rootMargin:'0px 0px -60px 0px'});
+document.querySelectorAll('.reveal').forEach(function(el){obs.observe(el)});
+document.querySelectorAll('a[href^="#"]').forEach(function(a){
+  a.addEventListener('click',function(e){
+    var t=document.querySelector(this.getAttribute('href'));
+    if(t){e.preventDefault();t.scrollIntoView({behavior:'smooth',block:'start'})}
+  });
+});
+</script>
+</body>
+</html>
